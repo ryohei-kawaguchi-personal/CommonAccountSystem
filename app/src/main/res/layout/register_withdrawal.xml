@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/registration_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_withdrawal_title"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item"
+        android:textSize="24sp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="50dp"
+        android:layout_below="@id/registration_title"
+        android:layout_marginTop="50dp" />
+
+    <Spinner
+        android:id="@+id/item_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_toRightOf="@id/item"
+        android:layout_marginStart="100dp"
+        android:layout_alignBottom="@id/item" />
+
+    <TextView
+        android:id="@+id/payer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payer"
+        android:textSize="24sp"
+        android:layout_alignStart="@id/item"
+        android:layout_below="@id/item"
+        android:layout_marginTop="30dp" />
+
+    <Spinner
+        android:id="@+id/payer_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/item_spinner"
+        android:layout_alignBottom="@id/payer"/>
+
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price"
+        android:textSize="24sp"
+        android:layout_alignStart="@id/item"
+        android:layout_below="@id/payer"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:id="@+id/price_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="9"
+        android:inputType="number"
+        android:layout_alignStart="@id/item_spinner"
+        android:layout_alignBottom="@id/price" />
+
+    <TextView
+        android:id="@+id/liquidation_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liquidation_date"
+        android:textSize="24sp"
+        android:layout_alignStart="@id/item"
+        android:layout_below="@id/price"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:id="@+id/liquidation_date_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="9"
+        android:inputType="date"
+        android:focusable="false"
+        android:onClick="inputLiquidationDate"
+        android:layout_alignStart="@id/item_spinner"
+        android:layout_alignBottom="@id/liquidation_date" />
+
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comment"
+        android:textSize="24sp"
+        android:layout_alignStart="@id/item"
+        android:layout_below="@id/liquidation_date"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:id="@+id/comment_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="9"
+        android:inputType="text"
+        android:layout_alignStart="@id/item_spinner"
+        android:layout_alignBottom="@id/comment" />
+
+    <Button
+        android:id="@+id/registration_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registration_button"
+        android:textSize="34sp"
+        android:onClick="onClickRegistrationButton"
+        android:layout_below="@id/comment"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

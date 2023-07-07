@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">共通家計簿アプリ</string>
+
+    <string name="home_title">ホーム</string>
+    <string name="register_withdrawal_button">出金の登録</string>
+    <string name="confirm_withdrawal_button">出金の確認</string>
+    <string name="send_data_button">PCにデータを送信</string>
+
+    <string name="register_withdrawal_title">出金登録</string>
+    <string name="item">項目</string>
+    <string name="price">料金</string>
+    <string name="liquidation_date">清算日</string>
+    <string name="payer">支払い者</string>
+    <string name="comment">コメント</string>
+    <string name="registration_button">登録</string>
+
+    <string name="register_success">登録完了</string>
+    <string name="register_failure">登録失敗</string>
+    <string name="continue_registration_button">続けて\n登録する</string>
+    <string name="return_home_button">ホーム\nに戻る</string>
+    <string name="warning_message">入力してください</string>
+
+</resources>
