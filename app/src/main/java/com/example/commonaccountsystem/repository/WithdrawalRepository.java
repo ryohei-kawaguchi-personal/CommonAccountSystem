@@ -4,10 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteConstraintException;
 
 import com.example.commonaccountsystem.dao.AppDatabase;
-import com.example.commonaccountsystem.dao.ItemDAO;
 import com.example.commonaccountsystem.dao.WithdrawalDAO;
-import com.example.commonaccountsystem.dto.Item;
-import com.example.commonaccountsystem.dto.Withdrawal;
+import com.example.commonaccountsystem.entity.Withdrawal;
 
 import java.util.List;
 

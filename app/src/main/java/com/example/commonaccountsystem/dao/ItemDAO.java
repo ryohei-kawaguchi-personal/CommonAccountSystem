@@ -1,10 +1,9 @@
 package com.example.commonaccountsystem.dao;
 
 import androidx.room.Dao;
-import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.commonaccountsystem.dto.Item;
+import com.example.commonaccountsystem.entity.Item;
 
 import java.util.List;
 

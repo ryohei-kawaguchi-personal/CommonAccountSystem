@@ -3,10 +3,9 @@ package com.example.commonaccountsystem.dao;
 
 
 import androidx.room.Dao;
-import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.commonaccountsystem.dto.Payer;
+import com.example.commonaccountsystem.entity.Payer;
 
 import java.util.List;
 

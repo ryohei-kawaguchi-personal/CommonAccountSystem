@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.commonaccountsystem.dao.AppDatabase;
 import com.example.commonaccountsystem.dao.ItemDAO;
-import com.example.commonaccountsystem.dto.Item;
+import com.example.commonaccountsystem.entity.Item;
 
 import java.util.List;
 import java.util.Optional;

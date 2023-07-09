@@ -4,8 +4,7 @@ import android.content.Context;
 
 import com.example.commonaccountsystem.dao.AppDatabase;
 import com.example.commonaccountsystem.dao.PayerDAO;
-import com.example.commonaccountsystem.dto.Item;
-import com.example.commonaccountsystem.dto.Payer;
+import com.example.commonaccountsystem.entity.Payer;
 
 import java.util.List;
 import java.util.Optional;
