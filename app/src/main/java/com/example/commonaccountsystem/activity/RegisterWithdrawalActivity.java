@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.commonaccountsystem.R;
-import com.example.commonaccountsystem.logic.RegisterWithdrawal;
+import com.example.commonaccountsystem.repository.WithdrawalRepository;
 import com.example.commonaccountsystem.validation.Validation;
-import com.example.commonaccountsystem.dto.Withdrawal;
+import com.example.commonaccountsystem.entity.Withdrawal;
 import com.example.commonaccountsystem.validation.EmptyValidation;
 import com.example.commonaccountsystem.repository.ItemRepository;
 import com.example.commonaccountsystem.repository.PayerRepository;
@@ -53,7 +53,7 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                ((EditText)liquidationDateText).setText(String.format(Locale.JAPAN, "%02d / %02d / %02d", year, month + 1, dayOfMonth));
+                ((EditText)liquidationDateText).setText(String.format(Locale.JAPAN, "%02d/%02d/%02d", year, month + 1, dayOfMonth));
             }
         },
                 calendar.get(Calendar.YEAR),
@@ -85,14 +85,17 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
         withdrawal.liquidation_date = liquidationDate.getText().toString();
         withdrawal.comment = comment.getText().toString();
 
-        RegisterWithdrawal registerWithdrawal = new RegisterWithdrawal();
         Intent intent = new Intent(this, RegisterResultActivity.class);
-        if(registerWithdrawal.register(this, withdrawal)){
+        if(register(withdrawal)){
             intent.putExtra("result", getString(R.string.register_success));
-
         }else{
             intent.putExtra("result", getString(R.string.register_failure));
         }
         startActivity(intent);
+    }
+
+    private boolean register(Withdrawal withdrawal) {
+        WithdrawalRepository wRep = new WithdrawalRepository(this);
+        return wRep.register(withdrawal);
     }
 }

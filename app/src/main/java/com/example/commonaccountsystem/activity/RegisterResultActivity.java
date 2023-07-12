@@ -1,7 +1,6 @@
 package com.example.commonaccountsystem.activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.commonaccountsystem.R;
-import com.example.commonaccountsystem.dto.Withdrawal;
-import com.example.commonaccountsystem.logic.RegisterWithdrawal;
 
 public class RegisterResultActivity extends AppCompatActivity {
 
