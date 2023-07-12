@@ -8,9 +8,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.commonaccountsystem.R;
-import com.example.commonaccountsystem.dto.Item;
-import com.example.commonaccountsystem.dto.Payer;
-import com.example.commonaccountsystem.dto.Withdrawal;
+import com.example.commonaccountsystem.entity.Item;
+import com.example.commonaccountsystem.entity.Payer;
+import com.example.commonaccountsystem.entity.Withdrawal;
 
 @Database(entities = {Item.class, Payer.class, Withdrawal.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
