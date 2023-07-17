@@ -17,8 +17,9 @@ public interface WithdrawalDAO {
     @Query("SELECT p.name AS payerName, i.name AS itemName, w.id, w.item_id, w.payer_id, w.price, w.liquidation_date, w.comment " +
             "FROM withdrawal AS w " +
             "JOIN item AS i ON w.item_id = i.id " +
-            "JOIN payer AS p ON w.payer_id = p.id;")
-    public List<WithdrawalWithItemAndPayer> selectByLiquidationDate();
+            "JOIN payer AS p ON w.payer_id = p.id " +
+            "WHERE date(w.liquidation_date) BETWEEN :yearPrevMonth ||'-22' AND :yearMonth ||'-21' ;")
+    public List<WithdrawalWithItemAndPayer> selectInYearMonth(String yearPrevMonth, String yearMonth);
 
     @Query("SELECT * FROM withdrawal")
     public List<Withdrawal> selectAll();

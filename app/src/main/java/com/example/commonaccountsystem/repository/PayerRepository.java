@@ -17,7 +17,9 @@ public class PayerRepository {
 
     private PayerRepository(Context context){
         AppDatabase db = AppDatabase.getInstance(context);
-        this.dao = db.payerDAO();
+        if(db != null){
+            this.dao = db.payerDAO();
+        }
     }
 
     public static PayerRepository getInstance(Context context){

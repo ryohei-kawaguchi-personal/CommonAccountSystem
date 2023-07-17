@@ -12,6 +12,10 @@
         android:theme="@style/Theme.CommonAccountSystem"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ConfirmWithdrawalActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CommonAccountSystem.NoActionBar" />
+        <activity
             android:name=".activity.RegisterResultActivity"
             android:exported="false"
             android:theme="@style/Theme.CommonAccountSystem.NoActionBar" />
@@ -24,6 +28,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

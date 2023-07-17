@@ -1,6 +1,5 @@
-package com.example.commonaccountsystem.dto;
+package com.example.commonaccountsystem.entity;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 
 public class WithdrawalWithItemAndPayer {
@@ -8,8 +7,6 @@ public class WithdrawalWithItemAndPayer {
     public Withdrawal withdrawal;
 
     public String itemName;
-
-    public int cost;
 
     public String payerName;
 }

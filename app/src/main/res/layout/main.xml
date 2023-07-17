@@ -52,7 +52,7 @@
         android:layout_marginBottom="80dp"
         android:text="@string/send_data_button"
         android:textSize="24sp"
-        android:onClick="onClicksendDataButton"
+        android:onClick="onClickSendDataButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

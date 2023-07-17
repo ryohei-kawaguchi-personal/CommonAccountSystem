@@ -53,7 +53,7 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                ((EditText)liquidationDateText).setText(String.format(Locale.JAPAN, "%02d/%02d/%02d", year, month + 1, dayOfMonth));
+                ((EditText)liquidationDateText).setText(String.format(Locale.JAPAN, "%02d-%02d-%02d", year, month + 1, dayOfMonth));
             }
         },
                 calendar.get(Calendar.YEAR),

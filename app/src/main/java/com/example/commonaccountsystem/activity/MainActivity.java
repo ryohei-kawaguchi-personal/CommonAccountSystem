@@ -7,16 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.commonaccountsystem.R;
-import com.example.commonaccountsystem.activity.RegisterWithdrawalActivity;
-import com.example.commonaccountsystem.dao.WithdrawalDAO;
-import com.example.commonaccountsystem.dto.Item;
-import com.example.commonaccountsystem.dto.Payer;
-import com.example.commonaccountsystem.dto.Withdrawal;
-import com.example.commonaccountsystem.dto.WithdrawalWithItemAndPayer;
-import com.example.commonaccountsystem.logic.RegisterWithdrawal;
+import com.example.commonaccountsystem.entity.WithdrawalWithItemAndPayer;
+import com.example.commonaccountsystem.repository.WithdrawalRepository;
 
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickConfirmWithdrawalButton(View view){
+        Intent intent = new Intent(this, ConfirmWithdrawalActivity.class);
+        startActivity(intent);
     }
 
     public void onClickSendDataButton(View view){
