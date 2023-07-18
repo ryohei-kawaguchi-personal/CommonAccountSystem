@@ -82,7 +82,7 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
         withdrawal.itemId = ItemRepository.getInstance(getApplicationContext()).fetchIdByName(itemName);
         withdrawal.payerId = PayerRepository.getInstance(getApplicationContext()).fetchIdByName(payerName);
         withdrawal.price = Integer.parseInt(price.getText().toString());
-        withdrawal.liquidation_date = liquidationDate.getText().toString();
+        withdrawal.liquidationDate = liquidationDate.getText().toString();
         withdrawal.comment = comment.getText().toString();
 
         Intent intent = new Intent(this, RegisterResultActivity.class);

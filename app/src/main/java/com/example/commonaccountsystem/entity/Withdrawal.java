@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "withdrawal",
         foreignKeys = {@ForeignKey(
                 entity = Item.class,
@@ -17,7 +19,7 @@ import androidx.room.PrimaryKey;
                 childColumns = "payer_id")
         }
 )
-public class Withdrawal{
+public class Withdrawal implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -33,7 +35,8 @@ public class Withdrawal{
     public int price;
 
     @NonNull
-    public String liquidation_date;
+    @ColumnInfo(name = "liquidation_date", index = true)
+    public String liquidationDate;
 
     public String comment;
 

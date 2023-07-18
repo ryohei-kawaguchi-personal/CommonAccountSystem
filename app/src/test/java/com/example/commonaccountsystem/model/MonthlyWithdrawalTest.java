@@ -78,7 +78,7 @@ public class MonthlyWithdrawalTest {
         withdrawal.itemId = itemId;
         withdrawal.payerId = payerId;
         withdrawal.price = price;
-        withdrawal.liquidation_date = liquidation_date;
+        withdrawal.liquidationDate = liquidation_date;
         withdrawal.comment = comment;
         return withdrawal;
     }
