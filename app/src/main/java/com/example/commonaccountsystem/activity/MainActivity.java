@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.commonaccountsystem.R;
+import com.example.commonaccountsystem.dao.AppDatabase;
 import com.example.commonaccountsystem.entity.WithdrawalWithItemAndPayer;
 import com.example.commonaccountsystem.repository.WithdrawalRepository;
 
@@ -33,4 +34,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClickSendDataButton(View view){
         //データ送信処理
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppDatabase.closeDB();
+    }
+
 }

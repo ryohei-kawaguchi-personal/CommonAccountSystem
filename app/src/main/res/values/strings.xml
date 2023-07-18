@@ -26,8 +26,8 @@
 
     <string name="amount">合計金額</string>
     <string name="difference">差額</string>
-    <!--
-    <string name="next_button">前へ</string>
-    <string name="prev_button">次へ</string>
-    -->
+
+    <string name="edit_withdrawal_title">出金編集</string>
+    <string name="delete">削除</string>
+
 </resources>

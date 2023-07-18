@@ -28,11 +28,15 @@ public abstract class AppDatabase extends RoomDatabase {
 //            }
 
             instance = Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.dbname))
-                    .createFromAsset(context.getString(R.string.dbname)+ ".db")
+                    .createFromAsset(context.getString(R.string.dbname))
                     .allowMainThreadQueries()
                     .build();
         }
         return instance;
+    }
+
+    public static void closeDB(){
+        instance.close();
     }
     public abstract ItemDAO itemDAO();
     public abstract PayerDAO payerDAO();
