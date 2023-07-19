@@ -6,13 +6,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.commonaccountsystem.entity.WithdrawalWithItemAndPayer;
 import com.example.commonaccountsystem.view_util.PayerSummaryAdapter;
 import com.example.commonaccountsystem.R;
 import com.example.commonaccountsystem.model.MonthlyWithdrawal;
+import com.example.commonaccountsystem.view_util.RecyclerViewClickListener;
 import com.example.commonaccountsystem.view_util.WithdrawalAdapter;
 import com.example.commonaccountsystem.view_model.ConfirmWithdrawalView;
 import com.example.commonaccountsystem.view_model.ConfirmWithdrawalViewFactory;
@@ -22,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Map;
 
-public class ConfirmWithdrawalActivity extends AppCompatActivity {
+public class ConfirmWithdrawalActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,6 @@ public class ConfirmWithdrawalActivity extends AppCompatActivity {
         displayTargetMonthlyWithdrawal(getThisYearMouth());
     }
     private YearMonth getThisYearMouth(){
-        //TODO
         return YearMonth.now();
     }
 
@@ -55,8 +57,15 @@ public class ConfirmWithdrawalActivity extends AppCompatActivity {
         String formattedYearMonth = targetYearMonth.format(formatter);
         title.setText(formattedYearMonth + getString(R.string.confirm_withdrawal_title));
 
-        setRecyclerView((RecyclerView) findViewById(R.id.payer_summary_recycler_view), new PayerSummaryAdapter(monthlyWithdrawal.getPayerSummaries()));
-        setRecyclerView((RecyclerView) findViewById(R.id.withdrawal_recycler_view), new WithdrawalAdapter(monthlyWithdrawal.getWithdrawals()));
+        RecyclerView payerSummaryRView = (RecyclerView) findViewById(R.id.payer_summary_recycler_view);
+        RecyclerView.Adapter payerSummaryAdapter = new PayerSummaryAdapter(monthlyWithdrawal.getPayerSummaries());
+        payerSummaryRView.setAdapter(payerSummaryAdapter);
+        payerSummaryRView.setLayoutManager(new LinearLayoutManager(this));
+
+        RecyclerView withdrawalRView = (RecyclerView) findViewById(R.id.withdrawal_recycler_view);
+        RecyclerView.Adapter withdrawalAdapter = new WithdrawalAdapter(monthlyWithdrawal.getWithdrawals(), this);
+        withdrawalRView.setAdapter(withdrawalAdapter);
+        withdrawalRView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setRecyclerView(RecyclerView rView, RecyclerView.Adapter adapter){
@@ -76,5 +85,17 @@ public class ConfirmWithdrawalActivity extends AppCompatActivity {
         ConfirmWithdrawalView viewModel = new ViewModelProvider(this, factory).get(ConfirmWithdrawalView.class);
         YearMonth targetYearMonth = viewModel.getTargetYearMonth().plusMonths(1);
         displayTargetMonthlyWithdrawal(targetYearMonth);
+    }
+
+    @Override
+    public void onItemClick(WithdrawalWithItemAndPayer withdrawal) {
+        Intent intent = new Intent(this, EditWithdrawalActivity.class);
+        intent.putExtra("withdrawal", withdrawal);
+        startActivity(intent);
+    }
+
+    public void onClickReturnHomeButton(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

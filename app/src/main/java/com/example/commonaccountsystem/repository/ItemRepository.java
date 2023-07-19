@@ -35,7 +35,7 @@ public class ItemRepository {
     }
     public List<String> fetchNamesWithVariableCost(){
         fetchAll();
-        return this.items.stream().filter(i -> i.cost == 0).map(i -> i.name).collect(Collectors.toList());
+        return this.items.stream()/*.filter(i -> i.cost == 0)*/.map(i -> i.name).collect(Collectors.toList());
     }
 
     public int fetchIdByName(String name){

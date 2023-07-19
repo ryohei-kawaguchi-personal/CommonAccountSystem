@@ -42,4 +42,13 @@ public class WithdrawalRepository {
         String formattedYearMonth = yearMonth.getYear() + "-" + formattedMonth;
         return this.dao.selectInYearMonth(formattedYearPrevMonth, formattedYearMonth);
     }
+
+    public boolean delete(Withdrawal withdrawal){
+        try{
+            this.dao.delete(withdrawal);
+            return true;
+        }catch(SQLiteConstraintException e){
+            return false;
+        }
+    }
 }

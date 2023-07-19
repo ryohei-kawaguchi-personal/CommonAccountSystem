@@ -99,13 +99,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/withdrawals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_below="@id/payer_summaries"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_above="@id/return_home_button"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -177,5 +179,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/return_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/return_home_button"
+        android:textSize="17sp"
+        android:onClick="onClickReturnHomeButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

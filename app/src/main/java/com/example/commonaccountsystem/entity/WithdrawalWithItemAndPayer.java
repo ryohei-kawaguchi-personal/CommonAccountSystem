@@ -2,7 +2,9 @@ package com.example.commonaccountsystem.entity;
 
 import androidx.room.Embedded;
 
-public class WithdrawalWithItemAndPayer {
+import java.io.Serializable;
+
+public class WithdrawalWithItemAndPayer implements Serializable {
     @Embedded
     public Withdrawal withdrawal;
 

@@ -1,6 +1,7 @@
 package com.example.commonaccountsystem.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -23,5 +24,8 @@ public interface WithdrawalDAO {
 
     @Query("SELECT * FROM withdrawal")
     public List<Withdrawal> selectAll();
+
+    @Delete
+    public void delete(Withdrawal withdrawal);
 
 }
