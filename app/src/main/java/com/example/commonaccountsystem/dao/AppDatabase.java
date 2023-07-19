@@ -23,9 +23,9 @@ public abstract class AppDatabase extends RoomDatabase {
         }
 
         if (instance == null) {
-            if(context.deleteDatabase(context.getString(R.string.dbname))){
-                System.out.println("DBを削除しました。");
-            }
+//            if(context.deleteDatabase(context.getString(R.string.dbname))){
+//                System.out.println("DBを削除しました。");
+//            }
 
             instance = Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.dbname))
                     .createFromAsset(context.getString(R.string.dbname))
