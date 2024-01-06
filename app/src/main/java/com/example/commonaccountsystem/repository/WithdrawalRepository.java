@@ -36,10 +36,10 @@ public class WithdrawalRepository {
             return null;
         }
 
-        String formattedMonth = String.format("%02d", yearMonth.minusMonths(1).getMonthValue());
-        String formattedYearPrevMonth = yearMonth.getYear() + "-" + formattedMonth;
-        formattedMonth = String.format("%02d", yearMonth.getMonthValue());
-        String formattedYearMonth = yearMonth.getYear() + "-" + formattedMonth;
+        // yyyy-MMの形式のString型に変換
+        String formattedYearPrevMonth = yearMonth.minusMonths(1).toString();
+        String formattedYearMonth = yearMonth.toString();
+
         return this.dao.selectInYearMonth(formattedYearPrevMonth, formattedYearMonth);
     }
 
