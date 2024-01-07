@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class RegisterWithdrawalActivity extends AppCompatActivity {
+public class RegisterWithdrawalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,9 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
         setSpinner(findViewById(R.id.payer_spinner), payerRepository.fetchAllNames());
 
         ItemRepository itemRepository = ItemRepository.getInstance(getApplicationContext());
-        setSpinner(findViewById(R.id.item_spinner), itemRepository.fetchNamesWithVariableCost());
+        Spinner itemSpinner = (Spinner) findViewById(R.id.item_spinner);
+        setSpinner(itemSpinner, itemRepository.fetchNamesWithVariableCost());
+        itemSpinner.setOnItemSelectedListener(this);
     }
     private void setSpinner(Spinner spinner, List<String> items){
         if(items != null){
@@ -45,6 +48,22 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
         }
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Spinner itemSpinner = (Spinner) parent;
+        ItemRepository itemRepository = ItemRepository.getInstance(getApplicationContext());
+        int cost = itemRepository.fetchCostByName(itemSpinner.getSelectedItem().toString());
+        EditText price = findViewById(R.id.price_edittext);
+        if(cost == 0){
+            price.getEditableText().clear();
+        }else{
+            price.setText(String.valueOf(cost));
+        }
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // 選択が消えた時には何もしない。
     }
 
     public void inputLiquidationDate(View liquidationDateText){

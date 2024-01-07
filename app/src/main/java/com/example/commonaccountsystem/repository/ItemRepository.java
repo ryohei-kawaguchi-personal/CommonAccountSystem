@@ -33,6 +33,7 @@ public class ItemRepository {
         }
         return this.items;
     }
+
     public List<String> fetchNamesWithVariableCost(){
         fetchAll();
         return this.items.stream()/*.filter(i -> i.cost == 0)*/.map(i -> i.name).collect(Collectors.toList());
@@ -44,5 +45,14 @@ public class ItemRepository {
         }
         Optional<Integer> id = items.stream().filter(i -> i.name.equals(name)).map(i -> i.id).findFirst();
         return id.orElse(-1);
+    }
+
+    public int fetchCostByName(String name){
+        int id = fetchIdByName(name);
+        if(this.items == null){
+            return dao.selectCostById(id);
+        }
+        Optional<Integer> cost = items.stream().filter(i -> i.id == id).map(i -> i.cost).findFirst();
+        return cost.orElse(0);
     }
 }

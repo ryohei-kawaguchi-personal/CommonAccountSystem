@@ -15,4 +15,6 @@ public interface ItemDAO {
     @Query("SELECT id FROM item WHERE name = :name")
     public int selectIdByName(String name);
 
+    @Query("SELECT cost FROM item WHERE id = :id")
+    public int selectCostById(int id);
 }
