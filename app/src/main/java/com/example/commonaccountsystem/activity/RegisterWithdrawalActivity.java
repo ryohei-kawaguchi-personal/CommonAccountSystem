@@ -20,6 +20,8 @@ import com.example.commonaccountsystem.validation.EmptyValidation;
 import com.example.commonaccountsystem.repository.ItemRepository;
 import com.example.commonaccountsystem.repository.PayerRepository;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -38,6 +40,10 @@ public class RegisterWithdrawalActivity extends AppCompatActivity implements Ada
         Spinner itemSpinner = (Spinner) findViewById(R.id.item_spinner);
         setSpinner(itemSpinner, itemRepository.fetchNamesWithVariableCost());
         itemSpinner.setOnItemSelectedListener(this);
+
+        EditText liquidationDate = (EditText) findViewById(R.id.liquidation_date_edittext);
+        LocalDate now = LocalDate.now();
+        liquidationDate.setText(now.toString());
     }
     private void setSpinner(Spinner spinner, List<String> items){
         if(items != null){
