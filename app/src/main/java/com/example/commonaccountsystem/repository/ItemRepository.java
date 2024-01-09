@@ -6,6 +6,7 @@ import com.example.commonaccountsystem.dao.AppDatabase;
 import com.example.commonaccountsystem.dao.ItemDAO;
 import com.example.commonaccountsystem.entity.Item;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,7 +37,11 @@ public class ItemRepository {
 
     public List<String> fetchNamesWithVariableCost(){
         fetchAll();
-        return this.items.stream()/*.filter(i -> i.cost == 0)*/.map(i -> i.name).collect(Collectors.toList());
+        return this.items.stream()
+                //.filter(i -> i.payment_date == null)
+                .sorted((i1,i2) -> Integer.compare(i1.displayOrder, i2.displayOrder))
+                .map(i -> i.name)
+                .collect(Collectors.toList());
     }
 
     public int fetchIdByName(String name){
