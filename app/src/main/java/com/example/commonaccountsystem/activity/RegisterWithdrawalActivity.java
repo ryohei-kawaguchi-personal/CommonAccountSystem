@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,11 +20,13 @@ import com.example.commonaccountsystem.validation.EmptyValidation;
 import com.example.commonaccountsystem.repository.ItemRepository;
 import com.example.commonaccountsystem.repository.PayerRepository;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class RegisterWithdrawalActivity extends AppCompatActivity {
+public class RegisterWithdrawalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,13 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
         setSpinner(findViewById(R.id.payer_spinner), payerRepository.fetchAllNames());
 
         ItemRepository itemRepository = ItemRepository.getInstance(getApplicationContext());
-        setSpinner(findViewById(R.id.item_spinner), itemRepository.fetchNamesWithVariableCost());
+        Spinner itemSpinner = (Spinner) findViewById(R.id.item_spinner);
+        setSpinner(itemSpinner, itemRepository.fetchNamesWithVariableCost());
+        itemSpinner.setOnItemSelectedListener(this);
+
+        EditText liquidationDate = (EditText) findViewById(R.id.liquidation_date_edittext);
+        LocalDate now = LocalDate.now();
+        liquidationDate.setText(now.toString());
     }
     private void setSpinner(Spinner spinner, List<String> items){
         if(items != null){
@@ -45,6 +54,35 @@ public class RegisterWithdrawalActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
         }
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Spinner itemSpinner = (Spinner) parent;
+        ItemRepository itemRepository = ItemRepository.getInstance(getApplicationContext());
+
+        //項目毎にデフォルトの金額をセットする
+        int cost = itemRepository.fetchCostByName(itemSpinner.getSelectedItem().toString());
+        EditText price = findViewById(R.id.price_edittext);
+        if(cost == 0){
+            price.getEditableText().clear();
+        }else{
+            price.setText(String.valueOf(cost));
+        }
+
+        //項目毎にデフォルトの支払い者をセットする
+        int payerId = itemRepository.fetchPayerIdByName(itemSpinner.getSelectedItem().toString());
+        // payerIdとSpinnerのindexが一致しない場合はコードに修正が必要
+        // https://anadreline.blogspot.com/2013/07/spinner.html
+        // PayerRepository payerRepository = PayerRepository.getInstance(getApplicationContext());
+        // String payerName = payerRepository.fetchName(payerId);
+        System.out.println(payerId);
+        Spinner payerSpinner = (Spinner) findViewById(R.id.payer_spinner);
+        int index = payerId -1;
+        payerSpinner.setSelection(index);
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // 選択が消えた時には何もしない。
     }
 
     public void inputLiquidationDate(View liquidationDateText){

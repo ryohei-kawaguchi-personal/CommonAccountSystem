@@ -13,7 +13,7 @@ import com.example.commonaccountsystem.entity.Item;
 import com.example.commonaccountsystem.entity.Payer;
 import com.example.commonaccountsystem.entity.Withdrawal;
 
-@Database(entities = {Item.class, Payer.class, Withdrawal.class}, version = 1, exportSchema = false)
+@Database(entities = {Item.class, Payer.class, Withdrawal.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 

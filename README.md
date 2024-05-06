@@ -18,3 +18,14 @@ data/data/com.example.commonaccountsystem/databases
 #### アプリのデプロイ
 スマホを指定して実行すると同じ名前のアプリがあるためエラーになる。  
 その後、自動的にアプリをアンインストールし、インストールしてくれる。  
+
+## DBのテーブル定義を変更した際のエラー解消法
+エラー例
+```agsl
+java.lang.IllegalStateException: Room cannot verify the data integrity. Looks like you've changed schema but forgot to update the version number. You can simply fix this by increasing the version number. Expected identity hash: 65b8f1ed4f8d44779a7725785a56ca04, found: ac46c404bde654dfe3fbbc58be6a674d
+```
+### 手順
+1. DBのバックアップから`room_master_table`を消去する。(データではなく、テーブルを削除)
+2. デバイスのフォルダからDBを削除する。必要ならcacheも削除しておく。
+3. src/main/assets 配下に新規DBを配置する。
+4. 何度か試行するときにcacheが効いてしまうことがあるので、`AppDatabase`の26~28行目をアンコメントし、コードのテストをする。

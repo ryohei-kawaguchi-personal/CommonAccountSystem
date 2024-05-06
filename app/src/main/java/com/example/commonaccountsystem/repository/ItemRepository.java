@@ -6,6 +6,7 @@ import com.example.commonaccountsystem.dao.AppDatabase;
 import com.example.commonaccountsystem.dao.ItemDAO;
 import com.example.commonaccountsystem.entity.Item;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,9 +34,14 @@ public class ItemRepository {
         }
         return this.items;
     }
+
     public List<String> fetchNamesWithVariableCost(){
         fetchAll();
-        return this.items.stream()/*.filter(i -> i.cost == 0)*/.map(i -> i.name).collect(Collectors.toList());
+        return this.items.stream()
+                //.filter(i -> i.payment_date == null)
+                .sorted((i1,i2) -> Integer.compare(i1.displayOrder, i2.displayOrder))
+                .map(i -> i.name)
+                .collect(Collectors.toList());
     }
 
     public int fetchIdByName(String name){
@@ -44,5 +50,19 @@ public class ItemRepository {
         }
         Optional<Integer> id = items.stream().filter(i -> i.name.equals(name)).map(i -> i.id).findFirst();
         return id.orElse(-1);
+    }
+
+    public int fetchCostByName(String name){
+        fetchAll();
+        int id = fetchIdByName(name);
+        Optional<Integer> cost = items.stream().filter(i -> i.id == id).map(i -> i.cost).findFirst();
+        return cost.orElse(0);
+    }
+
+    public int fetchPayerIdByName(String name){
+        fetchAll();
+        int id = fetchIdByName(name);
+        Optional<Integer> payerId = items.stream().filter(i -> i.id == id).map(i -> i.defaultPayer).findFirst();
+        return payerId.orElse(-1);
     }
 }

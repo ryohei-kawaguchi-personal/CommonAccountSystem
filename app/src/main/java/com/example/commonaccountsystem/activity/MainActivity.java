@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickSendDataButton(View view){
         //データ送信処理
+        AppDatabase.closeDB();
     }
 
     @Override
