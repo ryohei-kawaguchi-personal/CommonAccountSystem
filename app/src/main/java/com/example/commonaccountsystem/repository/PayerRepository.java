@@ -40,11 +40,13 @@ public class PayerRepository {
         fetchAll();
         return this.payers.stream().map(p -> p.name).collect(Collectors.toList());
     }
-
+//    public String fetchName(int id){
+//        fetchAll();
+//        Optional<String> name = payers.stream().filter(p -> p.id == id).map(p -> p.name).findFirst();
+//        return name.get();
+//    }
     public int fetchIdByName(String name){
-        if(this.payers == null){
-            return dao.selectIdByName(name);
-        }
+        fetchAll();
         Optional<Integer> id = payers.stream().filter(p -> p.name.equals(name)).map(p -> p.id).findFirst();
         return id.orElse(-1);
     }

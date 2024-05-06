@@ -59,6 +59,8 @@ public class RegisterWithdrawalActivity extends AppCompatActivity implements Ada
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner itemSpinner = (Spinner) parent;
         ItemRepository itemRepository = ItemRepository.getInstance(getApplicationContext());
+
+        //項目毎にデフォルトの金額をセットする
         int cost = itemRepository.fetchCostByName(itemSpinner.getSelectedItem().toString());
         EditText price = findViewById(R.id.price_edittext);
         if(cost == 0){
@@ -66,6 +68,17 @@ public class RegisterWithdrawalActivity extends AppCompatActivity implements Ada
         }else{
             price.setText(String.valueOf(cost));
         }
+
+        //項目毎にデフォルトの支払い者をセットする
+        int payerId = itemRepository.fetchPayerIdByName(itemSpinner.getSelectedItem().toString());
+        // payerIdとSpinnerのindexが一致しない場合はコードに修正が必要
+        // https://anadreline.blogspot.com/2013/07/spinner.html
+        // PayerRepository payerRepository = PayerRepository.getInstance(getApplicationContext());
+        // String payerName = payerRepository.fetchName(payerId);
+        System.out.println(payerId);
+        Spinner payerSpinner = (Spinner) findViewById(R.id.payer_spinner);
+        int index = payerId -1;
+        payerSpinner.setSelection(index);
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

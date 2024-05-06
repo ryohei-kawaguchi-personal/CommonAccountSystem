@@ -53,11 +53,16 @@ public class ItemRepository {
     }
 
     public int fetchCostByName(String name){
+        fetchAll();
         int id = fetchIdByName(name);
-        if(this.items == null){
-            return dao.selectCostById(id);
-        }
         Optional<Integer> cost = items.stream().filter(i -> i.id == id).map(i -> i.cost).findFirst();
         return cost.orElse(0);
+    }
+
+    public int fetchPayerIdByName(String name){
+        fetchAll();
+        int id = fetchIdByName(name);
+        Optional<Integer> payerId = items.stream().filter(i -> i.id == id).map(i -> i.defaultPayer).findFirst();
+        return payerId.orElse(-1);
     }
 }
