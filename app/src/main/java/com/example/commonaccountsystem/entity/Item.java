@@ -30,8 +30,8 @@ public class Item implements Serializable{
     @NonNull
     public int cost;
 
-    @ColumnInfo(name = "payment_date")
-    public String paymentDate;
+    @ColumnInfo(name = "payment_day")
+    public String paymentDay;
 
     @NonNull
     @ColumnInfo(name = "display_order")

@@ -40,10 +40,6 @@ public class RegisterWithdrawalActivity extends AppCompatActivity implements Ada
         Spinner itemSpinner = (Spinner) findViewById(R.id.item_spinner);
         setSpinner(itemSpinner, itemRepository.fetchNamesWithVariableCost());
         itemSpinner.setOnItemSelectedListener(this);
-
-        EditText liquidationDate = (EditText) findViewById(R.id.liquidation_date_edittext);
-        LocalDate now = LocalDate.now();
-        liquidationDate.setText(now.toString());
     }
     private void setSpinner(Spinner spinner, List<String> items){
         if(items != null){
@@ -63,9 +59,7 @@ public class RegisterWithdrawalActivity extends AppCompatActivity implements Ada
         //項目毎にデフォルトの金額をセットする
         int cost = itemRepository.fetchCostByName(itemSpinner.getSelectedItem().toString());
         EditText price = findViewById(R.id.price_edittext);
-        if(cost == 0){
-            price.getEditableText().clear();
-        }else{
+        if(cost != 0){
             price.setText(String.valueOf(cost));
         }
 
@@ -75,10 +69,15 @@ public class RegisterWithdrawalActivity extends AppCompatActivity implements Ada
         // https://anadreline.blogspot.com/2013/07/spinner.html
         // PayerRepository payerRepository = PayerRepository.getInstance(getApplicationContext());
         // String payerName = payerRepository.fetchName(payerId);
-        System.out.println(payerId);
         Spinner payerSpinner = (Spinner) findViewById(R.id.payer_spinner);
         int index = payerId -1;
         payerSpinner.setSelection(index);
+
+        // 項目毎にデフォルトの支払日をセットする
+        LocalDate paymentDate = itemRepository.fetchPaymentDateByName(itemSpinner.getSelectedItem().toString());
+        EditText liquidationDate = (EditText) findViewById(R.id.liquidation_date_edittext);
+        liquidationDate.setText(paymentDate.toString());
+
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
