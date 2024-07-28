@@ -6,6 +6,7 @@ import com.example.commonaccountsystem.dao.AppDatabase;
 import com.example.commonaccountsystem.dao.ItemDAO;
 import com.example.commonaccountsystem.entity.Item;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,12 @@ public class ItemRepository {
     private static ItemRepository instance;
     private ItemDAO dao;
     private List<Item> items;
+    private LocalDate now;
 
     private ItemRepository(Context context){
         AppDatabase db = AppDatabase.getInstance(context);
         this.dao = db.itemDAO();
+        now = LocalDate.now();
     }
 
     public static ItemRepository getInstance(Context context){
@@ -57,6 +60,13 @@ public class ItemRepository {
         int id = fetchIdByName(name);
         Optional<Integer> cost = items.stream().filter(i -> i.id == id).map(i -> i.cost).findFirst();
         return cost.orElse(0);
+    }
+    public LocalDate fetchPaymentDateByName(String name){
+        fetchAll();
+        int id = fetchIdByName(name);
+        Optional<String> paymentDayStr = items.stream().filter(i -> i.id == id).map(i -> i.paymentDay).filter(day -> day != null).findFirst();
+        Optional<Integer> paymentDay = paymentDayStr.map(Integer::parseInt);
+        return LocalDate.of(now.getYear(), now.getMonth(), paymentDay.orElse(now.getDayOfMonth()));
     }
 
     public int fetchPayerIdByName(String name){
