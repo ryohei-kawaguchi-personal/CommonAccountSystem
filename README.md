@@ -33,3 +33,6 @@ java.lang.IllegalStateException: Room cannot verify the data integrity. Looks li
 2. デバイスのフォルダからDBを削除する。必要ならcacheも削除しておく。
 3. src/main/assets 配下に新規DBを配置する。
 4. 何度か試行するときにcacheが効いてしまうことがあるので、`AppDatabase`の26~28行目をアンコメントし、コードのテストをする。
+
+## MPAndroidChartの参考サイト
+https://qiita.com/c60evaporator/items/14e63d22d860b73e6f22
