@@ -7,6 +7,7 @@ import com.example.commonaccountsystem.dao.ItemDAO;
 import com.example.commonaccountsystem.entity.Item;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class ItemRepository {
     private ItemDAO dao;
     private List<Item> items;
     private LocalDate now;
+    private final List<String> TARGET_ITEM_NAMES_FOR_TOTAL_AMOUNT = Arrays.asList("食費", "日用品代");
 
     private ItemRepository(Context context){
         AppDatabase db = AppDatabase.getInstance(context);
@@ -41,6 +43,7 @@ public class ItemRepository {
     public List<String> fetchNamesWithVariableCost(){
         fetchAll();
         return this.items.stream()
+                // TODO: 自動登録機能を実装する場合は以下をコメントアウト
                 //.filter(i -> i.payment_date == null)
                 .sorted((i1,i2) -> Integer.compare(i1.displayOrder, i2.displayOrder))
                 .map(i -> i.name)
@@ -74,5 +77,10 @@ public class ItemRepository {
         int id = fetchIdByName(name);
         Optional<Integer> payerId = items.stream().filter(i -> i.id == id).map(i -> i.defaultPayer).findFirst();
         return payerId.orElse(-1);
+    }
+
+    public List<Item> fetchTargetItemsForTotalAmount(){
+        fetchAll();
+        return items.stream().filter(i -> TARGET_ITEM_NAMES_FOR_TOTAL_AMOUNT.contains(i.name)).collect(Collectors.toList());
     }
 }

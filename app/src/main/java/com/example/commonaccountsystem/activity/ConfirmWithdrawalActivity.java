@@ -11,6 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.commonaccountsystem.view_util.ItemSummaryAdapter;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
 import com.example.commonaccountsystem.entity.WithdrawalWithItemAndPayer;
 import com.example.commonaccountsystem.view_util.PayerSummaryAdapter;
 import com.example.commonaccountsystem.R;
@@ -22,6 +28,7 @@ import com.example.commonaccountsystem.view_model.ConfirmWithdrawalViewFactory;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
@@ -62,10 +69,32 @@ public class ConfirmWithdrawalActivity extends AppCompatActivity implements Recy
         payerSummaryRView.setAdapter(payerSummaryAdapter);
         payerSummaryRView.setLayoutManager(new LinearLayoutManager(this));
 
+        RecyclerView itemSummaryRView = (RecyclerView) findViewById(R.id.item_summary_recycler_view);
+        RecyclerView.Adapter itemSummaryAdapter = new ItemSummaryAdapter(monthlyWithdrawal.getItemSummaries());
+        itemSummaryRView.setAdapter(itemSummaryAdapter);
+        itemSummaryRView.setLayoutManager(new LinearLayoutManager(this));
+
         RecyclerView withdrawalRView = (RecyclerView) findViewById(R.id.withdrawal_recycler_view);
         RecyclerView.Adapter withdrawalAdapter = new WithdrawalAdapter(monthlyWithdrawal.getWithdrawals(), this);
         withdrawalRView.setAdapter(withdrawalAdapter);
         withdrawalRView.setLayoutManager(new LinearLayoutManager(this));
+
+//        グラフの場合
+//        LineChart lineChart = findViewById(R.id.monthlyTotalLineChart);
+//        lineChart.setViewPortOffsets(100, 100, 100, 10);
+//        lineChart.setTouchEnabled(false);
+//        // データの作成
+//        ArrayList<Entry> entries = new ArrayList<>();
+//        entries.add(new Entry(0, 1));
+//        entries.add(new Entry(1, 2));
+//        entries.add(new Entry(2, 3));
+//        entries.add(new Entry(3, 4));
+//
+//        LineDataSet dataSet = new LineDataSet(entries, "Sample Data");
+//        LineData lineData = new LineData(dataSet);
+//        lineChart.setData(lineData);
+//
+//        lineChart.invalidate(); // グラフを更新
     }
 
     private void setRecyclerView(RecyclerView rView, RecyclerView.Adapter adapter){
